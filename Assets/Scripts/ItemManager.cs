@@ -16,6 +16,7 @@ public class Item
     [SerializeField] public Rarity rarity;
     [SerializeField] public string displayName;
     [SerializeField] public string description;
+    [SerializeField] public int quantity;
     //[SerializeField] public Sprite icon;
 
 }
@@ -28,9 +29,10 @@ public class ItemManager : MonoBehaviour
     public void Start()
     {
         items = new List<Item>();
-        InventoryAddItem(Item.Rarity.Uncommon, "Copper Sword", "Just a basic copper sword");
-        InventoryAddItem(Item.Rarity.Legendary, "Flame Sword", "The Flame of Swords");
+        InventoryAddItem(Item.Rarity.Uncommon, "Copper Sword", "Just a basic copper sword", 1);
+        InventoryAddItem(Item.Rarity.Legendary, "Flame Sword", "The Flame of Swords", 1);
 
+        InventoryAddItem(Item.Rarity.Common, "Gold Coin", "Currency used by all", UnityEngine.Random.Range(34, 159));
     }
 
     public void Update()
@@ -40,17 +42,18 @@ public class ItemManager : MonoBehaviour
         foreach (Item item in items)
         {
             counter++;
-            displayText.text += counter + ") " + item.rarity + "     " + item.displayName + "     " + item.description + "\n";
+            displayText.text += counter + ") " + item.rarity + "     " + item.displayName + "     " + item.description + "   " + item.quantity + "\n";
         }
     }
 
-    public void InventoryAddItem(Item.Rarity rarity, string itemName, string itemDescription)
+    public void InventoryAddItem(Item.Rarity rarity, string itemName, string itemDescription, int quantity)
     {
         Item item = new Item();
 
         item.rarity = rarity;
         item.displayName = itemName;
         item.description = itemDescription;
+        item.quantity = quantity;
 
         items.Add(item);
 
